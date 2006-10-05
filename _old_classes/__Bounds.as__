@@ -1,0 +1,48 @@
+﻿import util.*;
+import flash.geom.*;
+
+class util.Bounds {
+	public var left:Number;
+	public var right:Number;
+	public var top:Number;
+	public var bottom:Number;
+	
+	function Bounds(b:Object) {
+		left = b.left || 0;
+		right = b.right || 0;
+		top = b.top || 0;
+		bottom = b.bottom || 0;
+	}
+	public function clone() {
+		return new Bounds(this);
+	}
+	public function getWidth() {
+		return Math.abs(right - left);
+	}
+	public function getHeight() {
+		return Math.abs(bottom - top);
+	}
+	public function getLeft() {
+		return Math.min(left, right);
+	}
+	public function getRight() {
+		return Math.max(left, right);
+	}
+	public function getTop() {
+		return Math.min(top, bottom);
+	}
+	public function getBottom() {
+		return Math.max(top, bottom);
+	}
+	public function getTopLeft():Point {
+		return new Point(getLeft(), getTop());
+	}
+	function toString():String {
+		return [
+			"left:", left,
+			"right:", right,
+			"top:", top,
+			"bottom:", bottom
+		].join(" ");
+	}
+}

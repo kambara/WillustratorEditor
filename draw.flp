@@ -1,0 +1,130 @@
+﻿<flash_project name="draw" version="1">
+    <project_folder name="canvas" expanded="true">
+        <project_folder name="edit" expanded="false">
+            <project_folder name="handle" expanded="true">
+                <project_file path="./canvas/edit/handle/Handle.as" filetype="as" />
+                <project_file path="./canvas/edit/handle/HandleX.as" filetype="as" />
+                <project_file path="./canvas/edit/handle/HandleY.as" filetype="as" />
+                <project_file path="./canvas/edit/handle/SelectableHandle.as" filetype="as" />
+                <project_file path="./canvas/edit/handle/ControlHandle.as" filetype="as" />
+            </project_folder>
+            <project_file path="./canvas/edit/BoxEdit.as" filetype="as" />
+            <project_file path="./canvas/edit/PathEdit.as" filetype="as" />
+            <project_file path="./canvas/edit/ShapeEdit.as" filetype="as" />
+            <project_file path="./canvas/edit/TextEdit.as" filetype="as" />
+            <project_file path="./canvas/edit/Sizer.as" filetype="as" />
+            <project_file path="./canvas/edit/VertexHandles.as" filetype="as" />
+            <project_file path="./canvas/edit/MultiShapeEdit.as" filetype="as" />
+        </project_folder>
+        <project_folder name="menu" expanded="false">
+            <project_folder name="menuItemSet" expanded="false">
+                <project_file path="./canvas/menu/menuItemSet/ArrowMenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/FillColorMenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/FontSizeMenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/LineColorMenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/LineWidthMenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/MenuItemSet.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItemSet/TextColorMenuItemSet.as" filetype="as" />
+            </project_folder>
+            <project_folder name="menuItem" expanded="true">
+                <project_file path="./canvas/menu/menuItem/FillColorMenuItem.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItem/LineColorMenuItem.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItem/MenuItem.as" filetype="as" />
+                <project_file path="./canvas/menu/menuItem/TextColorMenuItem.as" filetype="as" />
+            </project_folder>
+            <project_file path="./canvas/menu/CircleMenu.as" filetype="as" />
+            <project_file path="./canvas/menu/LineMenu.as" filetype="as" />
+            <project_file path="./canvas/menu/Menu.as" filetype="as" />
+            <project_file path="./canvas/menu/TextMenu.as" filetype="as" />
+        </project_folder>
+        <project_folder name="shape" expanded="false">
+            <project_file path="./canvas/shape/Shape.as" filetype="as" />
+            <project_file path="./canvas/shape/Text.as" filetype="as" />
+            <project_file path="./canvas/shape/Box.as" filetype="as" />
+            <project_file path="./canvas/shape/Path.as" filetype="as" />
+        </project_folder>
+        <project_folder name="layer" expanded="false">
+            <project_file path="./canvas/layer/BackgroundLayer.as" filetype="as" />
+            <project_file path="./canvas/layer/CreateShapeLayer.as" filetype="as" />
+            <project_file path="./canvas/layer/EditLayer.as" filetype="as" />
+            <project_file path="./canvas/layer/ShapesLayer.as" filetype="as" />
+            <project_file path="./canvas/layer/Layer.as" filetype="as" />
+            <project_file path="./canvas/layer/TextEditLayer.as" filetype="as" />
+            <project_file path="./canvas/layer/SelectionLayer.as" filetype="as" />
+        </project_folder>
+        <project_folder name="creator" expanded="false">
+            <project_file path="./canvas/creator/BoxCreator.as" filetype="as" />
+            <project_file path="./canvas/creator/Creator.as" filetype="as" />
+            <project_file path="./canvas/creator/TextCreator.as" filetype="as" />
+            <project_file path="./canvas/creator/PathCreator.as" filetype="as" />
+            <project_file path="./canvas/creator/FreehandCreator.as" filetype="as" />
+            <project_file path="./canvas/creator/EllipseCreator.as" filetype="as" />
+        </project_folder>
+        <project_file path="./canvas/Canvas.as" filetype="as" />
+        <project_file path="./canvas/WillustratorDrawingMC.as" filetype="as" />
+    </project_folder>
+    <project_folder name="model" expanded="true">
+        <project_file path="./model/BoxModel.as" filetype="as" />
+        <project_file path="./model/Document.as" filetype="as" />
+        <project_file path="./model/IShapeModel.as" filetype="as" />
+        <project_file path="./model/PathModel.as" filetype="as" />
+        <project_file path="./model/ShapeCollection.as" filetype="as" />
+        <project_file path="./model/ShapeType.as" filetype="as" />
+        <project_file path="./model/TextModel.as" filetype="as" />
+        <project_file path="./model/Model.as" filetype="as" />
+        <project_file path="./model/Style.as" filetype="as" />
+        <project_file path="./model/Vertices.as" filetype="as" />
+        <project_file path="./model/Vertex.as" filetype="as" />
+        <project_file path="./model/TextStyle.as" filetype="as" />
+        <project_file path="./model/Control.as" filetype="as" />
+    </project_folder>
+    <project_folder name="util" expanded="false">
+        <project_folder name="colorpicker" expanded="false">
+            <project_file path="./util/colorpicker/ColorPicker.as" filetype="as" />
+            <project_file path="./util/colorpicker/ColorPickerCell.as" filetype="as" />
+            <project_file path="./util/colorpicker/ColorPickerPopup.as" filetype="as" />
+            <project_file path="./util/colorpicker/ColorTable.as" filetype="as" />
+        </project_folder>
+        <project_file path="./util/AdvancedDrawingMC.as" filetype="as" />
+        <project_file path="./util/ColorName.as" filetype="as" />
+        <project_file path="./util/Size.as" filetype="as" />
+        <project_file path="./util/XMLAttributes.as" filetype="as" />
+        <project_file path="./util/StagePosition.as" filetype="as" />
+        <project_file path="./util/SerialNumber.as" filetype="as" />
+        <project_file path="./util/TextLabel.as" filetype="as" />
+        <project_file path="./util/EditableTextLabel.as" filetype="as" />
+        <project_file path="./util/AdvancedDrawingUIObject.as" filetype="as" />
+        <project_file path="./util/BezierGenerator.as" filetype="as" />
+        <project_file path="./util/Snap.as" filetype="as" />
+    </project_folder>
+    <project_folder name="tools" expanded="false">
+        <project_file path="./tools/BoxToolButton.as" filetype="as" />
+        <project_file path="./tools/PathToolButton.as" filetype="as" />
+        <project_file path="./tools/SelectToolButton.as" filetype="as" />
+        <project_file path="./tools/TextToolButton.as" filetype="as" />
+        <project_file path="./tools/ToolButton.as" filetype="as" />
+        <project_file path="./tools/ToolButtons.as" filetype="as" />
+        <project_file path="./tools/ToolType.as" filetype="as" />
+        <project_file path="./tools/FreehandToolButton.as" filetype="as" />
+        <project_file path="./tools/EllipseToolButton.as" filetype="as" />
+    </project_folder>
+    <project_folder name="property" expanded="false">
+        <project_file path="./property/PropertyPanel.as" filetype="as" />
+        <project_file path="./property/TextPropertyPanel.as" filetype="as" />
+        <project_file path="./property/TextStyleProperties.as" filetype="as" />
+        <project_file path="./property/BoxPropertyPanel.as" filetype="as" />
+        <project_file path="./property/StyleProperties.as" filetype="as" />
+        <project_file path="./property/PathPropertyPanel.as" filetype="as" />
+        <project_file path="./property/CanvasPropertyPanel.as" filetype="as" />
+        <project_file path="./property/LayerProperties.as" filetype="as" />
+        <project_file path="./property/BoxToolPropertyPanel.as" filetype="as" />
+    </project_folder>
+    <project_file path="./draw.fla" filetype="fla" profile="" def_file="true" />
+    <project_file path="./Main.as" filetype="as" />
+    <project_file path="./Save.as" filetype="as" />
+    <project_file path="./Bar.as" filetype="as" />
+    <project_file path="./UndoBuffer.as" filetype="as" />
+    <project_file path="./ZoomComboBox.as" filetype="as" />
+    <project_file path="./CanvasScroll.as" filetype="as" />
+    <project_file path="./ImportFilePopupContent.as" filetype="as" />
+</flash_project>
