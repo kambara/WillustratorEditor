@@ -35,8 +35,10 @@ class ZoomComboBox extends mx.core.UIObject {
 	}
 	
 	function onResize() {
-		_x = StagePosition.getLeft() - 4;
-		_y = StagePosition.getBottom() - 18;
+		//_x = StagePosition.getLeft() - 4;
+		//_y = StagePosition.getBottom() - 18;
+		_x = StagePosition.getRight() - 80;
+		_y = StagePosition.getTop() + 10;
 	}
 	function change() {
 		main.onZoomChanged();

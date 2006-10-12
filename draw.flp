@@ -16,7 +16,7 @@
             <project_file path="./canvas/edit/VertexHandles.as" filetype="as" />
             <project_file path="./canvas/edit/MultiShapeEdit.as" filetype="as" />
         </project_folder>
-        <project_folder name="menu" expanded="false">
+        <project_folder name="menu" expanded="true">
             <project_folder name="menuItemSet" expanded="false">
                 <project_file path="./canvas/menu/menuItemSet/ArrowMenuItemSet.as" filetype="as" />
                 <project_file path="./canvas/menu/menuItemSet/FillColorMenuItemSet.as" filetype="as" />

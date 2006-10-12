@@ -373,8 +373,9 @@ class Main {
 		_root.createObject("Canvas", "canvas", 0, {main: this});
 		// propertyPanelが1
 		_root.createObject("CanvasScroll", "canvasScroll", 2, {main: this});
-		_root.createObject("ZoomComboBox", "zoomComboBox", 3, {main: this});
+		
 		_root.createObject("Bar", "bar", 4, {main: this});
+		_root.createObject("ZoomComboBox", "zoomComboBox", 5, {main: this});
 		
 		undoBuffer = new UndoBuffer(10);
 		Key.addListener(this);

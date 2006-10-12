@@ -35,14 +35,20 @@ class CanvasScroll extends mx.core.UIObject {
 		return new Point(horizontalScroll.scrollPosition, verticalScroll.scrollPosition);
 	}
 	function onResize() {
+		/*
 		horizontalScroll.setSize(Stage.width-64, 15);
 		horizontalScroll.move(StagePosition.getLeft() + 65,
+									StagePosition.getBottom() - 15);
+		*/
+		horizontalScroll.setSize(Stage.width-15, 15);
+		horizontalScroll.move(StagePosition.getLeft() + 15,
 									StagePosition.getBottom() - 15);
 		
 		horizontalScroll.setScrollProperties(horizontalScroll._width, 0, 1600);
 		horizontalScroll.pageScrollSize = 50;
 		
-		verticalScroll.setSize(15, Stage.height-56);
+		//verticalScroll.setSize(15, Stage.height-56);
+		verticalScroll.setSize(15, Stage.height-38);
 		verticalScroll.move(StagePosition.getLeft()+15,
 									StagePosition.getTop() + 39);
 		verticalScroll.setScrollProperties(verticalScroll._height, 0, 1600);
