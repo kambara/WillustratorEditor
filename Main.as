@@ -29,7 +29,7 @@ class Main {
 		if (_root.source_url) {
 			loadSrc(_root.source_url);
 		} else {
-			loadLocalSrc("test2.xml");
+			loadLocalSrc("test4.xml");
 		}
 		selectedShapes = new ShapeCollection();
 		currentTool = ToolType.select;
@@ -56,6 +56,9 @@ class Main {
 	}
 	public function getSaveUrl():String {
 		return _root.save_url;
+	}
+	public function getPublishUrl():String {
+		return _root.publish_url;
 	}
 	public function getCanvasScale() {
 		var scale = _root.zoomComboBox.getValue();
@@ -103,11 +106,14 @@ class Main {
 	private function updatePropertyPanel() {
 		hidePropertyPanel();
 		if (selectedShapes.getLength() > 1) {
+			// 複数選択時のプロパティを表示
 		} else if (selectedShapes.getLength() == 1) {
 			var m = selectedShapes.getItemAt(0);
 			var self = this;
+			
 			_root.onEnterFrame = function() {
-				_root.createObject(m.getShapeType()+"PropertyPanel", "propertyPanel", 1, {main:self, shapeModel:m});
+				////_root.createObject(m.getShapeType()+"PropertyPanel", "propertyPanel", 1, {main:self, shapeModel:m});
+				_root.createObject(m.getShapeType()+"PanelSet", "propertyPanel", 1, {main:self, shapeModel:m});
 				delete(_root.onEnterFrame);
 			}
 		} else {
@@ -118,7 +124,8 @@ class Main {
 		hidePropertyPanel();
 		var self = this;
 		_root.onEnterFrame = function() {
-			_root.createObject("CanvasPropertyPanel", "propertyPanel", 1, {main:self, shapeModel:self.getDocument()});
+			////_root.createObject("CanvasPropertyPanel", "propertyPanel", 1, {main:self, shapeModel:self.getDocument()});
+			_root.createObject("CanvasPanelSet", "propertyPanel", 1, {main:self, shapeModel:self.getDocument()});
 			delete(_root.onEnterFrame);
 		}
 	}
@@ -214,7 +221,8 @@ class Main {
 			document.getShapeCollection().addItem(copiedShapes.getItemAt(i));
 		}
 		unselectShape();
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 		log();
 	}
 	public function getIndexOfSelectedShape():Number {
@@ -228,7 +236,8 @@ class Main {
 		var m = selectedShapes.getItemAt(0);
 		document.getShapeCollection().moveIndexOf(m, index);
 		selectShape(document.getShapeCollection().getItemAt(index));
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 		log();
 	}
 	
@@ -255,7 +264,8 @@ class Main {
 		var rootNode:XMLNode = xml.firstChild;
 		if (rootNode.nodeName != "shapes") return;
 		document.addShapesFromXMLNode(rootNode);
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 	}
 	public function existShapesOnClipboard():Boolean {
 		var so:SharedObject = SharedObject.getLocal("clipboard");
@@ -308,7 +318,8 @@ class Main {
 			document.getShapeCollection().addItem(path);
 		}
 		getCanvas().finishCreate();
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 		selectSelectTool();
 		log();
 	}
@@ -330,7 +341,8 @@ class Main {
 			document.getShapeCollection().addItem(box);
 		}
 		getCanvas().finishCreate();
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 		selectSelectTool();
 		log();
 	}
@@ -344,7 +356,8 @@ class Main {
 			tm.textstyle.color = defaultShapeParams.textColor;
 			document.getShapeCollection().addItem(tm);
 		}
-		getCanvas().invalidate();
+		////getCanvas().invalidate();
+		getCanvas().updateOnlyShapes();
 		selectSelectTool();
 		log();
 	}
@@ -361,6 +374,14 @@ class Main {
 	//
 	public function onScroll():Void {
 		getCanvas().onResize();
+	}
+	
+	//
+	// Save
+	//
+	public function getBitmap() {
+		var size:Size = this.getDocument().getCanvasSize();
+		return this.getCanvas().getBitmap(size);
 	}
 	
 	//

@@ -1,7 +1,7 @@
 ﻿<flash_project name="draw" version="1">
-    <project_folder name="canvas" expanded="true">
+    <project_folder name="canvas" expanded="false">
         <project_folder name="edit" expanded="false">
-            <project_folder name="handle" expanded="true">
+            <project_folder name="handle" expanded="false">
                 <project_file path="./canvas/edit/handle/Handle.as" filetype="as" />
                 <project_file path="./canvas/edit/handle/HandleX.as" filetype="as" />
                 <project_file path="./canvas/edit/handle/HandleY.as" filetype="as" />
@@ -16,7 +16,7 @@
             <project_file path="./canvas/edit/VertexHandles.as" filetype="as" />
             <project_file path="./canvas/edit/MultiShapeEdit.as" filetype="as" />
         </project_folder>
-        <project_folder name="menu" expanded="true">
+        <project_folder name="menu" expanded="false">
             <project_folder name="menuItemSet" expanded="false">
                 <project_file path="./canvas/menu/menuItemSet/ArrowMenuItemSet.as" filetype="as" />
                 <project_file path="./canvas/menu/menuItemSet/FillColorMenuItemSet.as" filetype="as" />
@@ -26,7 +26,7 @@
                 <project_file path="./canvas/menu/menuItemSet/MenuItemSet.as" filetype="as" />
                 <project_file path="./canvas/menu/menuItemSet/TextColorMenuItemSet.as" filetype="as" />
             </project_folder>
-            <project_folder name="menuItem" expanded="true">
+            <project_folder name="menuItem" expanded="false">
                 <project_file path="./canvas/menu/menuItem/FillColorMenuItem.as" filetype="as" />
                 <project_file path="./canvas/menu/menuItem/LineColorMenuItem.as" filetype="as" />
                 <project_file path="./canvas/menu/menuItem/MenuItem.as" filetype="as" />
@@ -108,15 +108,26 @@
         <project_file path="./tools/FreehandToolButton.as" filetype="as" />
         <project_file path="./tools/EllipseToolButton.as" filetype="as" />
     </project_folder>
-    <project_folder name="property" expanded="false">
-        <project_file path="./property/PropertyPanel.as" filetype="as" />
-        <project_file path="./property/TextPropertyPanel.as" filetype="as" />
-        <project_file path="./property/TextStyleProperties.as" filetype="as" />
-        <project_file path="./property/BoxPropertyPanel.as" filetype="as" />
-        <project_file path="./property/StyleProperties.as" filetype="as" />
-        <project_file path="./property/PathPropertyPanel.as" filetype="as" />
-        <project_file path="./property/CanvasPropertyPanel.as" filetype="as" />
-        <project_file path="./property/LayerProperties.as" filetype="as" />
+    <project_folder name="property" expanded="true">
+        <project_folder name="obsolete" expanded="true">
+            <project_file path="./property/LayerProperties.as" filetype="as" />
+            <project_file path="./property/TextStyleProperties.as" filetype="as" />
+            <project_file path="./property/StyleProperties.as" filetype="as" />
+        </project_folder>
+        <project_folder name="property_panel" expanded="true">
+            <project_file path="./property/BoxPropertyPanel.as" filetype="as" />
+            <project_file path="./property/CanvasPropertyPanel.as" filetype="as" />
+            <project_file path="./property/PathPropertyPanel.as" filetype="as" />
+            <project_file path="./property/PropertyPanel.as" filetype="as" />
+            <project_file path="./property/TextPropertyPanel.as" filetype="as" />
+            <project_file path="./property/StylePropertyPanel.as" filetype="as" />
+            <project_file path="./property/TextStylePropertyPanel.as" filetype="as" />
+            <project_file path="./property/LayerPropertyPanel.as" filetype="as" />
+        </project_folder>
+        <project_folder name="panel_set" expanded="true">
+            <project_file path="./property/BoxPanelSet.as" filetype="as" />
+            <project_file path="./property/PanelSet.as" filetype="as" />
+        </project_folder>
         <project_file path="./property/BoxToolPropertyPanel.as" filetype="as" />
     </project_folder>
     <project_file path="./draw.fla" filetype="fla" profile="" def_file="true" />
@@ -127,4 +138,5 @@
     <project_file path="./ZoomComboBox.as" filetype="as" />
     <project_file path="./CanvasScroll.as" filetype="as" />
     <project_file path="./ImportFilePopupContent.as" filetype="as" />
+    <project_file path="./PublishButton.as" filetype="as" />
 </flash_project>

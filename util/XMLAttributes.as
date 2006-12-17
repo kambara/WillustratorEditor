@@ -11,6 +11,9 @@ class util.XMLAttributes {
 	function getIntParam(name) {
 		return (attr[name]) ? parseInt(attr[name]) : null;
 	}
+	function getFloatParam(name) {
+		return (attr[name]) ? parseFloat(attr[name]) : null;
+	}
 	function getColorParam(name) {
 		return (attr[name]) ? ColorName.colorToInt(attr[name]) : null;
 	}

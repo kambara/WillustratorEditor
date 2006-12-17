@@ -10,6 +10,7 @@ class model.BoxModel extends Model implements IShapeModel {
 	var round:Number;
 	var figure:String;
 	var style:Style;
+	var src:String;
 	
 	function BoxModel() {
 		super();
@@ -20,6 +21,7 @@ class model.BoxModel extends Model implements IShapeModel {
 		height = 0;
 		round = 0;
 		figure = "rect";
+		src = "";
 	}
 	function getShapeType():String {
 		return ShapeType.box;
@@ -51,6 +53,9 @@ class model.BoxModel extends Model implements IShapeModel {
 			width, height
 		);
 	}
+	public function getSrc():String {
+		return src;
+	}
 	function move(d):Void {
 		x += d.x;
 		y += d.y;
@@ -80,6 +85,7 @@ class model.BoxModel extends Model implements IShapeModel {
 		m.height = height;
 		m.round = round;
 		m.figure = figure;
+		m.src = src;
 		return m;
 	}
 	public function getXMLNode():XMLNode {
@@ -91,6 +97,7 @@ class model.BoxModel extends Model implements IShapeModel {
 		node.attributes.height = height.toString();
 		node.attributes.round = round.toString();
 		node.attributes.figure = figure;
+		node.attributes.src = src;
 		return node;
 	}
 	public function getSVGNode():XMLNode {
@@ -144,20 +151,23 @@ class model.BoxModel extends Model implements IShapeModel {
 		
 		return group;
 	}
-	public static function createFromXMLNode(shape:XMLNode):BoxModel {
+	public static function createFromXMLNode(shape:XMLNode, defaultStyle:Style):BoxModel {
 		var a = new XMLAttributes(shape.attributes);
 		var m:BoxModel = new BoxModel();
 		if (shape.firstChild && shape.firstChild.nodeType == 3)
 			m.text = shape.firstChild.nodeValue;
 		m.textstyle = TextStyle.createFromAttr(shape.attributes.textstyle);
 		
-		m.style = Style.createFromString(a.getStringParam("style"));
+		m.style = (defaultStyle)
+					? Style.createFromString(a.getStringParam("style"), defaultStyle)
+					: Style.createFromString(a.getStringParam("style"));
 		m.x = a.getIntParam("x");
 		m.y = a.getIntParam("y");
 		m.width = a.getIntParam("width");
 		m.height = a.getIntParam("height");
 		m.round = a.getIntParam("round");
 		m.figure = a.getStringParam("figure");
+		m.src = a.getStringParam("src");
 		return m;
 	}
 	public static function createFromSVGRectNode(shape:XMLNode):BoxModel {

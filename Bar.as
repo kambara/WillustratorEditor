@@ -6,6 +6,7 @@ class Bar extends AdvancedDrawingUIObject {
 	
 	var saveButton:Save;
 	var toolButtons:ToolButtons;
+	var publishButton:PublishButton;
 	
 	function Bar() { // want main
 	}
@@ -15,8 +16,14 @@ class Bar extends AdvancedDrawingUIObject {
 	function createChildren() {
 		attachMovie("ToolButtons", "toolButtons", 0).init(main);
 		toolButtons.setPosition(15, 5);
-		attachMovie("Save", "saveButton", 1).init(main.getDocument(), main.getSaveUrl());
+		attachMovie("Save", "saveButton", 1).init(main, main.getDocument(), main.getSaveUrl());
 		saveButton.setPosition(230, 10);
+		
+		createClassObject(PublishButton, "publishButton", 2, {
+			main: this.main,
+			_x: 320,
+			_y: 10
+		});
 		
 		Stage.addListener(this);
 		onResize();

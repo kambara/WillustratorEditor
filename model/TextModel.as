@@ -43,7 +43,7 @@ class model.TextModel extends Model implements IShapeModel {
 	private function getMetrics() {
 		var textformat:TextFormat = new TextFormat();
 		textformat.size = textstyle.fontSize;
-		textformat.font = "_sans";
+		textformat.font = textstyle.fontFamily || "_sans";
 		return textformat.getTextExtent(text);
 	}
 	public function getShapeType():String {
@@ -101,7 +101,7 @@ class model.TextModel extends Model implements IShapeModel {
 		m.y = a.getIntParam("y");
 		return m;
 	}
-	public static function createFromSVGTextNode(shape:XMLNode):TextModel {
+	public static function createFromSVGTextNode(shape:XMLNode, defaultStyle:Style):TextModel {
 		var a = new XMLAttributes(shape.attributes);
 		var m:TextModel = new TextModel();
 		
@@ -132,7 +132,9 @@ class model.TextModel extends Model implements IShapeModel {
 			m.textstyle.fontSize = fs;
 		}
 		// style
-		var svgStyle = a.getStringParam("style");
+		var svgStyle = (defaultStyle)
+						? a.getStringParam("style", defaultStyle)
+						: a.getStringParam("style");
 		if (svgStyle) {
 			svgStyle = svgStyle.split(" ").join("");
 			svgStyle = svgStyle.split("\r").join("");

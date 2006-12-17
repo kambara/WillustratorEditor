@@ -56,14 +56,14 @@ class property.PathPropertyPanel extends PropertyPanel {
 			main: main,
 			length: main.getDocument().getShapeCollection().getLength(),
 			_x: 10,
-			_y: 200
+			_y: 230
 		});
 		
 		createObject("Label", "editTypeLabel", serial.getNumber(), {
 			text: "Edit :",
 			fontSize: 14,
 			_x: 10,
-			_y: 240
+			_y: 270
 		});
 		createClassObject(RadioButton, "editPathRadioButton", serial.getNumber(), {
 			label: "Path",
@@ -71,7 +71,7 @@ class property.PathPropertyPanel extends PropertyPanel {
 			groupName: "editTypeChoice",
 			fontSize: 14,
 			_x: 70,
-			_y: 240
+			_y: 270
 		});
 		createClassObject(RadioButton, "editSizeRadioButton", serial.getNumber(), {
 			label: "Size",
@@ -79,7 +79,7 @@ class property.PathPropertyPanel extends PropertyPanel {
 			groupName: "editTypeChoice",
 			fontSize: 14,
 			_x: 130,
-			_y: 240
+			_y: 270
 		});
 		editPathRadioButton.selected = true;
 		

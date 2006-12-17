@@ -154,26 +154,30 @@ class model.PathModel extends Model implements IShapeModel {
 		m.endarrow = a.getStringParam("endarrow");
 		return m;
 	}
-	public static function createFromSVGPathNode(shape:XMLNode):PathModel {
+	public static function createFromSVGPathNode(shape:XMLNode, defaultStyle:Style):PathModel {
 		var a = new XMLAttributes(shape.attributes);
 		var m:PathModel = new PathModel();
 		
 		var d = a.getStringParam("d");
 		m.vertices = Vertices.createFromSVGPath(d);
-		// fill attributes
+		
+		// fill,stroke attributes (not style)
 		m.style.fill = a.getColorParam("fill") || 0x000000;
 		m.style.stroke = a.getColorParam("stroke");
-		var sw = a.getIntParam("stroke-width");
+		var sw = a.getFloatParam("stroke-width");
 		if (sw != null) {
 			m.style.strokeWidth = sw;
 		}
+		
 		// style
 		var svgStyle = a.getStringParam("style");
 		if (svgStyle) {
 			svgStyle = svgStyle.split(" ").join("");
 			svgStyle = svgStyle.split("\r").join("");
 			svgStyle = svgStyle.split("\n").join("");
-			m.style = Style.createFromString(svgStyle);
+			m.style = (defaultStyle)
+						? Style.createFromString(svgStyle, defaultStyle)
+						: Style.createFromString(svgStyle);
 		}
 		return m;
 	}

@@ -14,7 +14,8 @@ class canvas.shape.Text extends Shape {
 							shapeModel.x, shapeModel.y,
 							shapeModel.textstyle.color,
 							shapeModel.textstyle.fontSize,
-							"left", "top");
+							"left", "top",
+							shapeModel.textstyle.fontFamily);
 	}
 	private function drawWhileDragging(d:Point):Void {
 		draggingFrame.clear();

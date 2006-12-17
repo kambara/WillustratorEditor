@@ -4,17 +4,22 @@ import canvas.shape.*;
 import flash.geom.*;
 
 class canvas.shape.Box extends Shape {
-	var textlabel:TextLabel;
+	private var textlabel:TextLabel;
+	private var backgroundImage:MovieClip;
+	private var mask:MovieClip;
+	private var loadedSrc:String;
 	
 	function Box() {
-		attachMovie("TextLabel", "textlabel", 0).init();
+		attachMovie("TextLabel", "textlabel", 10).init();
 	}
 	function draw():Void {
 		clear();
-		if (shapeModel.figure == "rect")
+		drawBackgroundImage();
+		if (shapeModel.figure == "rect") {
 			drawBoxRect();
-		else if (shapeModel.figure == "ellipse")
+		} else if (shapeModel.figure == "ellipse") {
 			drawBoxEllipse();
+		}
 		drawText();
 	}
 	private function drawWhileDragging(d:Point):Void {
@@ -22,15 +27,72 @@ class canvas.shape.Box extends Shape {
 		draggingFrame.drawRectLine(shapeModel.x+d.x, shapeModel.y+d.y, shapeModel.width, shapeModel.height,
 												1, 0x000000, 100);
 	}
+	
+	private function loadBackgroundImage() {
+		backgroundImage = createEmptyMovieClip("backgroundImage", 0);
+		backgroundImage._quality = "BEST";
+		var img = backgroundImage;
+		var w = shapeModel.width;
+		var h = shapeModel.height;
+		var mcLoader:MovieClipLoader = new MovieClipLoader();
+		mcLoader.addListener({
+			onLoadError: function() {
+				trace("load error");
+			},
+			onLoadInit: function() {
+				img._width = w;
+				img._height = h;
+			}
+		});
+		mcLoader.loadClip(shapeModel.getSrc(), backgroundImage);
+	}
+	private function drawBackgroundImage() {
+		if (!shapeModel.getSrc()) return;
+		// 必要なら読み込む
+		if (loadedSrc != shapeModel.getSrc()) {
+			loadedSrc = shapeModel.getSrc();
+			loadBackgroundImage();
+		}
+		
+		// 画像サイズ・位置
+		backgroundImage._x = shapeModel.x;
+		backgroundImage._y = shapeModel.y;
+		if (backgroundImage._width && backgroundImage._height) {
+			backgroundImage._width = shapeModel.width;
+			backgroundImage._height = shapeModel.height;
+		}
+		
+		// マスク
+		if (!mask) {
+			mask = attachMovie("WillustratorDrawingMC", "mask", 1);
+		}
+		mask.clear();
+		if (shapeModel.figure == "rect") {
+			mask.drawFillRoundRect(shapeModel.x, shapeModel.y, shapeModel.width, shapeModel.height,
+								 shapeModel.round, shapeModel.round,
+								 1, 0x000000, 100,
+								 0x000000, 100);
+		} else if (shapeModel.figure == "ellipse") {
+			var rx = shapeModel.width/2;
+			var ry = shapeModel.height/2;
+			var cx = shapeModel.x + rx;
+			var cy = shapeModel.y + ry;
+			mask.drawFillOval(cx, cy, rx, ry,
+							 1, 0x000000, 100,
+							 0x000000, 100);
+		}
+		backgroundImage.setMask(mask);
+	}
 	private function drawBoxRect() {
-		if (shapeModel.style.getFillAlpha()>0 || shapeModel.style.fill != null) {
+		if (shapeModel.style.getFillAlpha()>0 || shapeModel.style.fill != null) { // 塗りがあるとき
 			drawFillRoundRect(shapeModel.x, shapeModel.y, shapeModel.width, shapeModel.height,
 									 shapeModel.round, shapeModel.round,
 									 shapeModel.style.strokeWidth, shapeModel.style.stroke,
 									 shapeModel.style.getStrokeAlpha(),
 									 shapeModel.style.fill,
 									 shapeModel.style.getFillAlpha());
-		} else {
+		} else { // 塗りがないとき
+			// 透明の太い線 (選択用)
 			drawRoundRectLine(shapeModel.x, shapeModel.y, shapeModel.width, shapeModel.height,
 									 shapeModel.round, shapeModel.round,
 									 10, 0x000000, 0);
@@ -67,25 +129,7 @@ class canvas.shape.Box extends Shape {
 							shapeModel.y + shapeModel.height/2,
 							shapeModel.textstyle.color,
 							shapeModel.textstyle.fontSize,
-							"center", "middle");
+							"center", "middle",
+							shapeModel.textstyle.fontFamily);
 	}
-	
-	/***
-	function hitTo(target:MovieClip) {
-		var a = new Point(shapeModel.center.x, shapeModel.center.y);
-		var b = new Point(shapeModel.center.x + shapeModel.radius.width,
-						  shapeModel.center.y);
-		var c = new Point(shapeModel.center.x - shapeModel.radius.width,
-						  shapeModel.center.y);
-		var d = new Point(shapeModel.center.x,
-						  shapeModel.center.y + shapeModel.radius.height);
-		var e = new Point(shapeModel.center.x,
-						  shapeModel.center.y - shapeModel.radius.height);
-		return ( target.hitTest(a.x, a.y, true)
-					|| target.hitTest(b.x, b.y, true)
-					|| target.hitTest(c.x, c.y, true)
-					|| target.hitTest(d.x, d.y, true)
-					|| target.hitTest(e.x, e.y, true) );
-	}
-	***/
 }

@@ -2,6 +2,7 @@
 import canvas.layer.*;
 import mx.core.*;
 import flash.geom.*;
+import flash.display.BitmapData;
 
 //
 // 各レイヤーやモデルの操作をするコントローラ
@@ -44,7 +45,9 @@ class canvas.Canvas extends UIComponent {
 	public function draw():Void {
 		super.draw();
 		backgroundLayer.invalidate();
-		shapesLayer.createChildren();
+		////shapesLayer.createChildren();
+		shapesLayer.invalidate();
+		
 		editLayer.startEdit();
 	}
 	function onResize() {
@@ -126,5 +129,68 @@ class canvas.Canvas extends UIComponent {
 		editLayer.invalidate();
 		shapesLayer.invalidate();
 		onResize();
+	}
+	
+	public function getBitmap(size):Object {
+		// shapesLayerをBitmap化
+		var bmpData:BitmapData = new BitmapData(size.width, size.height, false, 0xFFFFFFFF);
+		bmpData.draw(shapesLayer);
+		/*
+		var mc:MovieClip = this.createEmptyMovieClip("test_mc"+Math.random(), 100);
+		mc.attachBitmap(bmpData, 100);
+		mc.onMouseDown = function() {
+			mc.startDrag(false);
+		}
+		mc.onMouseUp = function() {
+			mc.stopDrag();
+		}
+		*/
+		
+		var raw:Array = [];
+		for (var y=0; y<size.height; y++) {
+			for (var x=0; x<size.width; x++) {
+				var rgb:Number = bmpData.getPixel(x, y);
+				raw.push(rgb);
+			}
+		}
+		
+		// 圧縮する
+		var compress:Array = [];
+		var color:Number = 0;
+		var count:Number = 0;
+		for (var i=0; i<raw.length; i++) {
+			if (i == 0) { // First
+				color = raw[0];
+				count = 1;
+			} else if (raw[i] != color) {
+				//compress.push(color);
+				//compress.push(count);
+				compress.push( color.toString(32) );
+				compress.push( (count==1) ? "" : count.toString() );
+				color = raw[i];
+				count = 1;
+			} else {
+				count++;
+			}
+			if (i == raw.length-1) {
+				compress.push( color.toString(32) );
+				compress.push( (count==1) ? "" : count.toString() );
+			}
+		}
+		
+		var compressStr = compress.join(",");
+		trace((compressStr.length/1000) + "KB");
+		//var rawStr = raw.join(",");
+		//trace((rawStr.length/1000) + "KB-> " + (compressStr.length/1000) + "KB (" + (compressStr.length/rawStr.length) + ")");
+		//trace(compressStr);
+		
+		return {
+			width: size.width,
+			height: size.height,
+			data: compressStr
+		};
+		// dataは
+		// 32bit,連続する数(1のときは空文字),
+		// という文字列の連続
 	}
 }

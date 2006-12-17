@@ -14,8 +14,11 @@ class model.Style {
 		strokeWidth = 1;
 		strokeOpacity = 1;
 	}
-	public static function createFromString(str:String):Style {
+	public static function createFromString(str:String, defaultStyle:Style):Style {
 		var style = new Style();
+		if (defaultStyle) {
+			style = defaultStyle;
+		}
 		var buf:Array = str.split(";");
 		for(var i=0; i<buf.length; i++) {
 			if (!buf[i]) {
@@ -33,7 +36,7 @@ class model.Style {
 					style.stroke = (prop[1] == "none") ? null : ColorName.colorToInt(prop[1]);
 					break;
 				case "stroke-width":
-					style.strokeWidth = parseInt(prop[1]);
+					style.strokeWidth = parseFloat(prop[1]);
 					break;
 				case "fill-opacity":
 					style.fillOpacity = parseFloat(prop[1]);

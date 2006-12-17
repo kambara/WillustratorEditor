@@ -69,7 +69,8 @@ class canvas.shape.Path extends Shape {
 							center.y,
 							shapeModel.textstyle.color,
 							shapeModel.textstyle.fontSize,
-							"center", "middle");
+							"center", "middle",
+							shapeModel.textstyle.fontFamily);
 	}
 	/***
 	function hitTo(target:MovieClip) {

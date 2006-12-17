@@ -178,11 +178,16 @@ class model.Vertices {
 			case "S":
 			case "s":
 			case "L":
-			case "l" :
+			case "l":
+			case "H":
+			case "h":
+			case "V":
+			case "v":
 			case "Z":
 			case "z":
 			case null:
 				if (buf != "") {
+					// bufにたまったものをcmdにする
 					var cmd:Array = [];
 					var b = buf.split(" ");
 					for (var j=0; j<b.length; j++) {
@@ -216,7 +221,7 @@ class model.Vertices {
 			trace(cmds[i]);
 		}
 		*/
-		// 相対座標を絶対座標に変換 c->C s->C l->L
+		// 相対座標を絶対座標に変換 c->C s->C l->L h->L
 		var prePoint:Point;
 		for (var i=0; i<cmds.length; i++) {
 			var cmd = cmds[i];
@@ -260,6 +265,30 @@ class model.Vertices {
 					newCmd.push("L");
 					newCmd.push(prePoint.x + cmd[1]);
 					newCmd.push(prePoint.y + cmd[2]);
+					cmds[i] = newCmd;
+					prePoint = new Point(newCmd[1], newCmd[2]);
+					break;
+				
+				case "H":
+				case "h":
+					var newCmd:Array = [];
+					newCmd.push("L");
+					newCmd.push((cmd[0] == "H")
+									? cmd[1]
+									: prePoint.x + cmd[1]);
+					newCmd.push(prePoint.y);
+					cmds[i] = newCmd;
+					prePoint = new Point(newCmd[1], newCmd[2]);
+					break;
+					
+				case "V":
+				case "v":
+					var newCmd:Array = [];
+					newCmd.push("L");
+					newCmd.push(prePoint.x);
+					newCmd.push((cmd[0]=="V")
+									? cmd[1]
+									: prePoint.y + cmd[1]);
 					cmds[i] = newCmd;
 					prePoint = new Point(newCmd[1], newCmd[2]);
 					break;

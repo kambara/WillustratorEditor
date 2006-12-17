@@ -12,6 +12,7 @@ class property.TextStyleProperties extends mx.core.UIObject {
 	
 	private var fontColorLabel;
 	private var fontSizeComboBox:ComboBox;
+	private var fontFamilyComboBox:ComboBox;
 	
 	function TextStyleProperties() {
 	}
@@ -45,6 +46,18 @@ class property.TextStyleProperties extends mx.core.UIObject {
 			fontSizeComboBox.addItem(items[i]);
 		}
 		
+		createClassObject(ComboBox, "fontFamilyComboBox", 4, {
+			_x: 20,
+			_y: 30
+		});
+		fontFamilyComboBox.setSize(140, fontFamilyComboBox._height);
+		
+		var fontFamilyItems:Array = ["_sans", "_serif", "_typewriter"].concat(TextField.getFontList().sort());
+		
+		for (var i=0; i<fontFamilyItems.length; i++) {
+			fontFamilyComboBox.addItem(fontFamilyItems[i]);
+		}
+		
 		//
 		// Events
 		//
@@ -71,11 +84,23 @@ class property.TextStyleProperties extends mx.core.UIObject {
 				self.main.onPropertyChanged();
 			}
 		});
+		
+		fontFamilyComboBox.addEventListener("focusIn", focusListener);
+		fontFamilyComboBox.addEventListener("focusOut", focusListener);
+		fontFamilyComboBox.addEventListener("change", {
+			change: function(event) {
+				var value = event.target.value;
+				self.textstyle.fontFamily = value;
+				self.main.onPropertyChanged();
+			}
+		});
 	}
+	
 	public function draw():Void {
 		super.draw();
 		fontColorLabel.setColor(textstyle.color);
 		fontSizeComboBox.text = textstyle.fontSize + "pt";
+		fontFamilyComboBox.text = textstyle.fontFamily;
 	}
 	
 	function onSetFocus() {

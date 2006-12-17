@@ -59,7 +59,7 @@ class property.TextPropertyPanel extends PropertyPanel {
 			main: main,
 			length: main.getDocument().getShapeCollection().getLength(),
 			_x: 10,
-			_y: 120
+			_y: 150
 		});
 		
 		// set events

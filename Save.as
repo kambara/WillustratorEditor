@@ -1,12 +1,14 @@
 ﻿import model.*;
 
 class Save extends MovieClip {
+	var main:Main;
 	var document:Document;
 	var saveUrl:String;
 	var sender:LoadVars;
 	var receiver:LoadVars;
 	
-	public function init(d, url) {
+	public function init(main, d, url) {
+		this.main = main;
 		this.document = d;
 		this.saveUrl = url;
 		var self = this;
@@ -27,6 +29,7 @@ class Save extends MovieClip {
 		sender = new LoadVars();
 		sender.xml = xmlStr;
 		sender.svg = svgStr;
+		trace(xmlStr);
 		sender.sendAndLoad(this.saveUrl, this.receiver, "POST");
 	}
 	function onRelease() {
@@ -34,9 +37,8 @@ class Save extends MovieClip {
 			return;
 		var xml:XML = document.getXML();
 		var svg:XML = document.getSVG();
-		trace(xml.toString());
-		trace(svg.toString());
 		sendXML(xml.toString(), svg.toString());
 		gotoAndStop("saving");
+		
 	}
 }

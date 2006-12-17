@@ -16,7 +16,8 @@ class TextEditLayer extends Layer {
 		textLabel.setProperties(m.getText(), pos.x, pos.y,
 										  0x000000,
 										  m.getTextStyle().fontSize,
-										  m.getTextAlign(), m.getTextVAlign());
+										  m.getTextAlign(), m.getTextVAlign(),
+										  m.getTextStyle().fontFamily);
 		var self = this;
 		textLabel.onChanged = function() {
 			self.onTextChanged();

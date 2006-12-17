@@ -60,17 +60,25 @@ class ImportFilePopupContent extends mx.core.UIObject {
 		}
 		return null;
 	}
-	function parseSVGNode(parentNode) {
+	function parseSVGNode(parentNode, parentStyle) {
+		if (parentStyle == undefined) {
+			parentStyle = new Style();
+			// svg default style?
+		}
 		for (var shapeNode:XMLNode = parentNode.firstChild; shapeNode != null; shapeNode = shapeNode.nextSibling) {
 			var m:Model = null;
 			switch( shapeNode.nodeName ) {
 				case "g":
 				case "a":
-					parseSVGNode(shapeNode);
+					if (shapeNode.attributes['style']) {
+						var mergedStyle = Style.createFromString(shapeNode.attributes['style'], parentStyle);
+						parseSVGNode(shapeNode, mergedStyle);
+					} else {
+						parseSVGNode(shapeNode, parentStyle);
+					}
 					break;
-					
 				case "path":
-					m = PathModel.createFromSVGPathNode(shapeNode);
+					m = PathModel.createFromSVGPathNode(shapeNode, parentStyle.clone());
 					break;
 				case "polygon":
 					break;

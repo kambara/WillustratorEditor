@@ -4,23 +4,25 @@
 	private var y:Number;
 	private var align:String;
 	private var valign:String;
+	private var fontFamily:String;
 	
 	public function init():TextLabel {
 		createTextField("textfield", 1, 0, 0, 1, 1);
 		textfield.autoSize = true;
 		textfield.selectable = false;
 		textfield.multiline = true;
+		
 		return this;
 	}
 	
-	public function setProperties(text, x, y, color, fontSize, align, valign) {
+	public function setProperties(text, x, y, color, fontSize, align, valign, fontFamily) {
 		this.align = align ? align : "left";
 		this.valign = valign ? valign : "top";
-		
+
 		var textformat = new TextFormat();
 		textformat.align = this.align;
 		textformat.size = fontSize;
-		textformat.font = "_sans";
+		textformat.font = fontFamily || "_sans";
 		textfield.setNewTextFormat(textformat);
 		textfield.textColor = color;
 		textfield.text = (text) ? text : "";

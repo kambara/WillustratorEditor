@@ -11,9 +11,11 @@ class property.LayerProperties extends mx.core.UIObject {
 	private var main;
 	private var length;
 	
-	private var label;
+	////private var label;
 	private var layerProp;
-	private var denomLabel;
+	////private var denomLabel;
+	
+	private var denom:TextField;
 	
 	function LayerProperties() {
 	}
@@ -22,12 +24,15 @@ class property.LayerProperties extends mx.core.UIObject {
 	}
 	public function createChildren():Void {
 		var serial = new SerialNumber();
+		/****
 		createObject("Label", "label", serial.getNumber(), {
 			text: "Layer :",
 			fontSize: 14,
 			_x: 0,
 			_y: 0
 		});
+		****/
+		/***
 		if (length) {
 			createObject("Label", "denomLabel", serial.getNumber(), {
 				text: "/ "+length.toString(),
@@ -36,6 +41,13 @@ class property.LayerProperties extends mx.core.UIObject {
 				_y: 0
 			});
 		}
+		***/
+		if (length) {
+			denom.text = length.toString();
+			layerProp.maximum = length;
+		}
+		
+		/***
 		var numStepperScaleX = 70;
 		var numStepperFontSize = 14;
 		createClassObject(NumericStepper, "layerProp", serial.getNumber(), {
@@ -46,6 +58,8 @@ class property.LayerProperties extends mx.core.UIObject {
 			scaleX: numStepperScaleX,
 			fontSize: numStepperFontSize
 		});
+		***/
+		
 		layerProp.addEventListener("focusIn", this);
 		layerProp.addEventListener("focusOut", this);
 		layerProp.addEventListener("change", this);
