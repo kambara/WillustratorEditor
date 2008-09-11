@@ -1,4 +1,4 @@
-﻿import util.*;
+import util.*;
 import canvas.creator.*;
 import model.*;
 import flash.geom.*;
